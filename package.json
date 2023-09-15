@@ -1,0 +1,53 @@
+{
+  "name": "@web3mason/w3m-nft-contracts",
+  "version": "0.1.0",
+  "description": "Web3Masons Token (W3M) Presale React.js App",
+  "private": true,
+  "license": "MIT",
+  "author": {
+    "name": "web3mason.io",
+    "email": "support@web3mason.io",
+    "url": "https://web3mason.io/"
+  },
+  "homepage": "https://github.com/web3mason/w3m-nft-contracts#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/web3mason/w3m-nft-contracts.git"
+  },
+  "bugs": {
+    "url": "https://github.com/web3mason/w3m-nft-contracts/issues",
+    "email": "support@web3mason.io"
+  },
+  "scripts": {
+    "clean": "rimraf ./build/ && mkdirp ./build/ && rimraf ./flatten/ && mkdirp ./flatten/",
+    "precompile": "yarn clean",
+    "compile": "truffle compile",
+    "postcompile": "yarn run flatten",
+    "predeploy": "yarn run compile",
+    "deploy": "truffle migrations --network",
+    "verify": "truffle run verify --network",
+    "test": "truffle test",
+    "flatten": "waffle flatten"
+  },
+  "files": [
+    "contracts",
+    "build"
+  ],
+  "dependencies": {
+    "@openzeppelin/contracts": "4.9.3",
+    "@openzeppelin/contracts-upgradeable": "4.9.3",
+    "erc721a": "4.2.3",
+    "erc721a-upgradeable": "4.2.3",
+    "operator-filter-registry": "1.4.2"
+  },
+  "devDependencies": {
+    "@openzeppelin/truffle-upgrades": "^1.20.1",
+    "@truffle/hdwallet-provider": "^2.1.15",
+    "dotenv": "^16.3.1",
+    "ethereum-waffle": "^4.0.10",
+    "mkdirp": "^3.0.1",
+    "rimraf": "^5.0.1",
+    "truffle": "^5.11.5",
+    "truffle-plugin-verify": "^0.6.5"
+  }
+}

@@ -47,15 +47,23 @@
 // const HDWalletProvider = require('@truffle/hdwallet-provider');
 
 module.exports = {
-  /**
-   * Networks define how you connect to your ethereum client and let you set the
-   * defaults web3 uses to send transactions. If you don't specify one truffle
-   * will spin up a managed Ganache instance for you on port 9545 when you
-   * run `develop` or `test`. You can ask a truffle command to use a specific
-   * network from the command line, e.g
-   *
-   * $ truffle test --network <network-name>
-   */
+  // Configure your compilers
+  contracts_directory: './contracts',
+  contracts_build_directory: './build',
+  migrations_directory: './migrations',
+
+  compilers: {
+    solc: {
+      version: '0.8.21',
+      settings: {
+        optimizer: {
+          enabled: true,
+          runs: 200,
+        },
+        evmVersion: 'shanghai',
+      },
+    },
+  },
 
   networks: {
     // Useful for testing. The `development` name is special - truffle uses it by default
@@ -102,21 +110,6 @@ module.exports = {
   mocha: {
     // timeout: 100000
   },
-
-  // Configure your compilers
-  compilers: {
-    solc: {
-      version: "0.8.17" // Fetch exact version from solc-bin (default: truffle's version)
-      // docker: true,        // Use "0.5.1" you've installed locally with docker (default: false)
-      // settings: {          // See the solidity docs for advice about optimization and evmVersion
-      //  optimizer: {
-      //    enabled: false,
-      //    runs: 200
-      //  },
-      //  evmVersion: "byzantium"
-      // }
-    }
-  }
 
   // Truffle DB is currently disabled by default; to enable it, change enabled:
   // false to enabled: true. The default storage location can also be

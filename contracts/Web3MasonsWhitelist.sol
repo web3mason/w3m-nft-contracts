@@ -66,11 +66,14 @@ contract Web3MasonsWhitelist is Ownable {
             accountId = _accounts.length;
             _accountData[account].id = accountId;
             _accountData[account].getTokens = getTokensAnyWay;
+            MAX_SPOTS_PAID++;
+        } else if (accountId != 0 && _accountData[account].deposited == 0) {
+            SPOTS_FREE--;
+            MAX_SPOTS_PAID++;
+            _accountData[account].getTokens = getTokensAnyWay;
         }
 
         _accountData[account].deposited += msg.value;
-        //MAX_SPOTS_PAID++;
-        //SPOTS_FREE--;
     }
 
     function mint() external {
@@ -78,6 +81,8 @@ contract Web3MasonsWhitelist is Ownable {
     }
 
     function withdraw() external {
-        //
+        address payable receiver = payable(_msgSender());
+        receiver.sendValue(_accountData[_msgSender()].deposited);
+        _accountData[_msgSender()].deposited = 0;
     }
 }
